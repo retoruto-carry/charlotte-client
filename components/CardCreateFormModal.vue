@@ -4,6 +4,7 @@
       <header class="modal-card-head">
         <p class="modal-card-title">
           ICカードを追加
+          {{ lastUnknowTouchIdmDate }}
         </p>
       </header>
       <section class="modal-card-body">
@@ -36,8 +37,13 @@ export default {
     return {
       formData: {
         name: ''
-      }
+      },
+      lastUnknowTouchIdmDate: ''
     }
+  },
+  async created() {
+    const { data } = await this.$axios.$get('last-unknown-touch-idm')
+    this.lastUnknowTouchIdmDate = data.created_at
   }
 }
 </script>
