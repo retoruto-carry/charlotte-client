@@ -36,16 +36,22 @@ export default {
     }
   },
   async created() {
-    const { data } = await this.$axios.$get('residents')
-    this.residents = data
+    await this.initResidents()
   },
   methods: {
+    async initResidents() {
+      const { data } = await this.$axios.$get('residents')
+      this.residents = data
+    },
     deleteResident(residentId) {
       alert(residentId)
     },
-    createResident(form) {
-      alert(form.name)
+    async createResident(form) {
+      await this.$axios.$post('residents', {
+        name: form.name
+      })
       this.isCardCreateFormModalActive = false
+      this.initResidents()
     }
   }
 }
