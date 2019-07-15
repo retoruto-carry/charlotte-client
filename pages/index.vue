@@ -4,7 +4,7 @@
       type="is-success"
       size="is-small"
       icon-left="plus"
-      @click="isCardCreateFormModalActive = true"
+      @click="isResidentCreateFormModalActive = true"
     >
       住人を追加
     </b-button>
@@ -14,25 +14,25 @@
       @deleteResident="deleteResident($event)"
     />
 
-    <b-modal :active.sync="isCardCreateFormModalActive" has-modal-card>
-      <card-create-form-modal @createResident="createResident($event)" />
+    <b-modal :active.sync="isResidentCreateFormModalActive" has-modal-card>
+      <resident-create-form-modal @createResident="createResident($event)" />
     </b-modal>
   </section>
 </template>
 
 <script>
 import residentTable from '~/components/ResidentTable'
-import CardCreateFormModal from '~/components/CardCreateFormModal'
+import ResidentCreateFormModal from '~/components/ResidentCreateFormModal'
 
 export default {
   components: {
     residentTable,
-    CardCreateFormModal
+    ResidentCreateFormModal
   },
   data() {
     return {
       residents: [],
-      isCardCreateFormModalActive: false
+      isResidentCreateFormModalActive: false
     }
   },
   async created() {
@@ -50,7 +50,7 @@ export default {
       await this.$axios.$post('residents', {
         name: form.name
       })
-      this.isCardCreateFormModalActive = false
+      this.isResidentCreateFormModalActive = false
       this.initResidents()
     }
   }
