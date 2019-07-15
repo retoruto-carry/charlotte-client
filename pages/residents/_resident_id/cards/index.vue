@@ -1,58 +1,60 @@
 <template>
   <section>
-    <h1>{{ resident.name }}さんのカード一覧</h1>
     <b-button
       type="is-success"
       size="is-small"
       icon-left="plus"
-      @click="isComponentModalActive = true"
+      @click="isCardCreateFormModalActive = true"
     >
-      カードを追加
+      住人を追加
     </b-button>
-    <b-modal :active.sync="isComponentModalActive" has-modal-card>
-      <card-create-form-modal @create="create()" />
+
+    <card-table :cards="resident.cards" @deleteCard="deleteCard($event)" />
+
+    <b-modal :active.sync="isCardCreateFormModalActive" has-modal-card>
+      <card-create-form-modal @createResident="createResident($event)" />
     </b-modal>
-    <h2 v-for="(card, index) in resident.cards" :key="index">
-      {{ card.name }}
-      <b-button type="is-danger" size="is-small" icon-left="delete">
-        削除
-      </b-button>
-    </h2>
   </section>
 </template>
 
 <script>
+import CardTable from '~/components/CardTable'
 import CardCreateFormModal from '~/components/CardCreateFormModal'
+
 export default {
   components: {
+    CardTable,
     CardCreateFormModal
   },
   data() {
     return {
       resident: {
-        name: null,
+        name: '',
         cards: []
       },
-      isComponentModalActive: false
+      isCardCreateFormModalActive: false
     }
   },
   async created() {
-    const { data } = await this.$axios.$get(
-      `http://localhost/api/residents/${this.$route.params.resident_id}`
-    )
-    this.resident = data
+    await this.initResident()
   },
   methods: {
-    create() {
-      alert('create')
-      this.isComponentModalActive = false
+    async initResident() {
+      const { data } = await this.$axios.$get(
+        `residents/${this.$route.params.resident_id}`
+      )
+      this.resident = data
+    },
+    deleteCard(cardId) {
+      alert(cardId)
+    },
+    async createResident(form) {
+      await this.$axios.$post('residents', {
+        name: form.name
+      })
+      this.isCardCreateFormModalActive = false
+      this.initResidents()
     }
   }
 }
 </script>
-
-<style scoped>
-h1 {
-  font-size: 20px;
-}
-</style>
