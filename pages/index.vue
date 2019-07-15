@@ -1,21 +1,38 @@
 <template>
   <section>
+    <b-button
+      type="is-success"
+      size="is-small"
+      icon-left="plus"
+      @click="isComponentModalActive = true"
+    >
+      住人を追加
+    </b-button>
+
     <resident-table
       :residents="residents"
       @deleteResident="deleteResident($event)"
     />
+
+    <b-modal :active.sync="isComponentModalActive" has-modal-card>
+      <card-create-modal-form @createResident="createResident($event)" />
+    </b-modal>
   </section>
 </template>
 
 <script>
 import residentTable from '~/components/ResidentTable'
+import CardCreateModalForm from '~/components/CardCreateModalForm'
+
 export default {
   components: {
-    residentTable
+    residentTable,
+    CardCreateModalForm
   },
   data() {
     return {
-      residents: []
+      residents: [],
+      isComponentModalActive: false
     }
   },
   async created() {
@@ -23,8 +40,12 @@ export default {
     this.residents = data
   },
   methods: {
-    deleteResident(event) {
-      alert(event)
+    deleteResident(residentId) {
+      alert(residentId)
+    },
+    createResident(form) {
+      alert(form.name)
+      this.isComponentModalActive = false
     }
   }
 }

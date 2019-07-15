@@ -8,14 +8,21 @@
       </header>
       <section class="modal-card-body">
         <b-field label="ユーザー名">
-          <b-input :value="name" placeholder="ユーザー名を入力" required />
+          <b-input
+            v-model="formData.name"
+            placeholder="ユーザー名を入力"
+            required
+          />
         </b-field>
       </section>
       <footer class="modal-card-foot">
         <button class="button" type="button" @click="$parent.close()">
           キャンセル
         </button>
-        <button class="button is-primary" @click="$emit('create')">
+        <button
+          class="button is-primary"
+          @click="$emit('createResident', formData)"
+        >
           追加する
         </button>
       </footer>
@@ -25,10 +32,11 @@
 
 <script>
 export default {
-  props: {
-    name: {
-      type: String,
-      default: ''
+  data() {
+    return {
+      formData: {
+        name: ''
+      }
     }
   }
 }
