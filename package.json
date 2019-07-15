@@ -14,8 +14,9 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "nuxt-buefy": "^0.3.2",
-    "nuxt": "^2.0.0"
+    "@nuxtjs/axios": "^5.5.4",
+    "nuxt": "^2.0.0",
+    "nuxt-buefy": "^0.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^0.0.1",

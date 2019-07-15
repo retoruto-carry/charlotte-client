@@ -21,7 +21,7 @@
     <section class="main-content columns">
       <aside class="column is-2 section">
         <p class="menu-label is-hidden-touch">
-          General
+          Menu
         </p>
         <ul class="menu-list">
           <li v-for="(item, key) of items" :key="key">
@@ -45,14 +45,14 @@ export default {
     return {
       items: [
         {
-          title: 'Home',
-          icon: 'home',
+          title: '住人一覧',
+          icon: 'account',
           to: { name: 'index' }
         },
         {
-          title: 'Inspire',
-          icon: 'lightbulb',
-          to: { name: 'inspire' }
+          title: 'イベント',
+          icon: 'calendar',
+          to: { name: 'events' }
         }
       ]
     }

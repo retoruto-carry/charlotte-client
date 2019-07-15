@@ -1,46 +1,39 @@
 <template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card title="Free" icon="github-circle">
-        Open source on
-        <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
-      </card>
+  <section>
+    <b-table hoverable mobile-cards :data="residents">
+      <template slot-scope="props">
+        <b-table-column field="name" label="ユーザー名" centered>
+          {{ props.row.name }}
+        </b-table-column>
 
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">
-          Every
-        </b>
-        component is responsive
-      </card>
-
-      <card title="Modern" icon="alert-decagram">
-        Built with
-        <a href="https://vuejs.org/">
-          Vue.js
-        </a>
-        and
-        <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
-      </card>
-    </div>
+        <b-table-column label="操作" centered>
+          <b-button
+            size="is-small"
+            type="is-primary"
+            tag="router-link"
+            :to="`residents/${props.row.id}/cards`"
+          >
+            カード詳細
+          </b-button>
+          <b-button size="is-small" type="is-danger">
+            ユーザー削除
+          </b-button>
+        </b-table-column>
+      </template>
+    </b-table>
   </section>
 </template>
 
 <script>
-import Card from '~/components/Card'
-
 export default {
-  name: 'HomePage',
-
-  components: {
-    Card
+  data() {
+    return {
+      residents: []
+    }
+  },
+  async created() {
+    const { data } = await this.$axios.$get('http://localhost/api/residents/')
+    this.residents = data
   }
 }
 </script>

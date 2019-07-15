@@ -34,8 +34,16 @@ export default {
   modules: [
     // Doc: https://buefy.github.io/#/documentation
     'nuxt-buefy',
-    '@nuxtjs/eslint-module'
+    '@nuxtjs/eslint-module',
+    '@nuxtjs/axios'
   ],
+  /*
+   ** Axios module configuration
+   */
+  axios: {
+    // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.API_URL || 'http://localhost/api/'
+  },
   /*
    ** Build configuration
    */
