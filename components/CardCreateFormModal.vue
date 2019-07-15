@@ -4,10 +4,11 @@
       <header class="modal-card-head">
         <p class="modal-card-title">
           ICカードを追加
-          {{ lastUnknowTouchIdmDate }}
         </p>
       </header>
       <section class="modal-card-body">
+        {{ diffMin }}分前に未登録のカードがタッチされました。<br />
+        このカードを{{ resident.name }}さんに登録します
         <b-field label="ICカード名">
           <b-input
             v-model="formData.name"
@@ -32,13 +33,27 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
+  props: {
+    resident: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {
       formData: {
         name: ''
       },
       lastUnknowTouchIdmDate: ''
+    }
+  },
+  computed: {
+    diffMin() {
+      const now = moment()
+      return now.diff(moment(this.lastUnknowTouchIdmDate), 'minutes')
     }
   },
   async created() {

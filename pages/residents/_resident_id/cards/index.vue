@@ -12,7 +12,10 @@
     <card-table :cards="resident.cards" @deleteCard="deleteCard($event)" />
 
     <b-modal :active.sync="isCardCreateFormModalActive" has-modal-card>
-      <card-create-form-modal @createCard="createCard($event)" />
+      <card-create-form-modal
+        :resident="resident"
+        @createCard="createCard($event)"
+      />
     </b-modal>
   </section>
 </template>
