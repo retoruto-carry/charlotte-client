@@ -6,13 +6,13 @@
       icon-left="plus"
       @click="isCardCreateFormModalActive = true"
     >
-      住人を追加
+      ICカードを追加
     </b-button>
 
     <card-table :cards="resident.cards" @deleteCard="deleteCard($event)" />
 
     <b-modal :active.sync="isCardCreateFormModalActive" has-modal-card>
-      <card-create-form-modal @createResident="createResident($event)" />
+      <card-create-form-modal @createCard="createCard($event)" />
     </b-modal>
   </section>
 </template>
@@ -48,10 +48,13 @@ export default {
     deleteCard(cardId) {
       alert(cardId)
     },
-    async createResident(form) {
-      await this.$axios.$post('residents', {
-        name: form.name
-      })
+    async createCard(form) {
+      await this.$axios.$post(
+        `residents/${this.$route.params.resident_id}/cards`,
+        {
+          name: form.name
+        }
+      )
       this.isCardCreateFormModalActive = false
       this.initResidents()
     }

@@ -3,14 +3,14 @@
     <div class="modal-card" style="width: auto">
       <header class="modal-card-head">
         <p class="modal-card-title">
-          ICカードを追加
+          ユーザーを追加
         </p>
       </header>
       <section class="modal-card-body">
-        <b-field label="ICカード名">
+        <b-field label="ユーザー名">
           <b-input
             v-model="formData.name"
-            placeholder="ICカード名を入力"
+            placeholder="ユーザー名を入力"
             required
           />
         </b-field>
@@ -21,7 +21,7 @@
         </button>
         <button
           class="button is-primary"
-          @click="$emit('createCard', formData)"
+          @click="$emit('createResident', formData)"
         >
           追加する
         </button>
