@@ -15,19 +15,19 @@
     />
 
     <b-modal :active.sync="isComponentModalActive" has-modal-card>
-      <card-create-modal-form @createResident="createResident($event)" />
+      <card-create-form-modal @createResident="createResident($event)" />
     </b-modal>
   </section>
 </template>
 
 <script>
 import residentTable from '~/components/ResidentTable'
-import CardCreateModalForm from '~/components/CardCreateModalForm'
+import CardCreateFormModal from '~/components/CardCreateFormModal'
 
 export default {
   components: {
     residentTable,
-    CardCreateModalForm
+    CardCreateFormModal
   },
   data() {
     return {

@@ -10,7 +10,7 @@
       カードを追加
     </b-button>
     <b-modal :active.sync="isComponentModalActive" has-modal-card>
-      <card-create-modal-form @create="create()" />
+      <card-create-form-modal @create="create()" />
     </b-modal>
     <h2 v-for="(card, index) in resident.cards" :key="index">
       {{ card.name }}
@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import CardCreateModalForm from '~/components/CardCreateModalForm'
+import CardCreateFormModal from '~/components/CardCreateFormModal'
 export default {
   components: {
-    CardCreateModalForm
+    CardCreateFormModal
   },
   data() {
     return {
