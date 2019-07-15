@@ -56,7 +56,7 @@ export default {
         }
       )
       this.isCardCreateFormModalActive = false
-      this.initResidents()
+      this.initResident()
     }
   }
 }
