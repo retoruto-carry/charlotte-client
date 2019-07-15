@@ -48,8 +48,21 @@ export default {
       )
       this.resident = data
     },
-    deleteCard(cardId) {
-      alert(cardId)
+    async deleteCard(cardId) {
+      await this.$dialog.confirm({
+        title: 'ICカードを削除しますか？',
+        message: 'この操作は取り消すことが出来ません。よろしいですか？',
+        confirmText: '削除する',
+        cancelText: 'キャンセル',
+        type: 'is-danger',
+        hasIcon: true,
+        onConfirm: async () => {
+          await this.$axios.$delete(
+            `residents/${this.$route.params.resident_id}/cards/${cardId}`
+          )
+          this.initResident()
+        }
+      })
     },
     async createCard(form) {
       await this.$axios.$post(
